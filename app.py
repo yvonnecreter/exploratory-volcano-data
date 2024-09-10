@@ -159,7 +159,7 @@ st.plotly_chart(fig_scatter)
 
 
 st.text(
-    f"{len(df.Number.unique())} Volcanoes out of {len(df_raw.Number.unique())} Total,\n{len(df.Country.unique())} Countries out of {len(df_raw.Country.unique())} Total,\n{len(df[df.Weighted_Danger_Level>moderate_danger_threshold])} out of which above moderate danger threshold*,\n{len(df[df.Weighted_Danger_Level>high_danger_threshold])} above high danger threshold*."
+    f"{len(df.Number.unique())}** Volcanoes out of {len(df_raw.Number.unique())} Total\n{len(df.Country.unique())} Countries out of {len(df_raw.Country.unique())} Total,\n{len(df[df.Weighted_Danger_Level>moderate_danger_threshold])} out of which above moderate danger threshold*,\n{len(df[df.Weighted_Danger_Level>high_danger_threshold])} above high danger threshold*."
 )
 
 # TODO Radiobutton: Top 10 Countries, Volcano Data
@@ -211,7 +211,7 @@ else:
             hover_name="Volcano Name",
             values="Weighted_Danger_Level",
             color="Weighted_Danger_Level",
-            title="Danger Level Computation, Overview",
+            title="Danger Level, Overview",
             color_continuous_scale="thermal",
             labels={"Weighted_Danger_Level": "Danger Level"},
         )
