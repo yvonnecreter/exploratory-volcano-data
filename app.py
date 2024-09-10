@@ -207,7 +207,8 @@ else:
     st.plotly_chart(
         px.treemap(
             data_frame=df,
-            path=["Last Known", "Status", "Type", "Volcano Name"],
+            path=["Last Known", "Status", "Type", "Country"],
+            hover_name="Volcano Name",
             values="Weighted_Danger_Level",
             color="Weighted_Danger_Level",
             title="Danger Level Computation, Overview",
@@ -232,7 +233,12 @@ else:
         data_frame=df.sort_values(by="LastKnown_Id"),
         y="Elev",
         x="Last Known",
+        hover_name="Volcano Name",
         opacity=0.2,
+        labels={
+            "Elev": "Elevation Level",
+            "Last Known": "Last Known Eruption Strength",
+        },
     ).data:
         fig_volcano.add_trace(
             trace,
@@ -245,7 +251,9 @@ else:
         data_frame=df.sort_values(by="LastKnown_Id"),
         y="Type",
         x="Last Known",
+        hover_name="Volcano Name",
         opacity=0.2,
+        labels={"Type": "Volcano Type", "Last Known": "Last Known Eruption Strength"},
     ).data:
         fig_volcano.add_trace(
             trace,
@@ -255,7 +263,12 @@ else:
 
     # * correlation of population and last known (filter by color = status), order by last known
     for trace in px.scatter(
-        data_frame=df, y="Population (2020)", x="Last Known", opacity=0.2
+        data_frame=df,
+        y="Population (2020)",
+        x="Last Known",
+        hover_name="Volcano Name",
+        opacity=0.2,
+        labels={"Last Known": "Last Known Eruption Strength"},
     ).data:
         fig_volcano.add_trace(
             trace,
@@ -264,7 +277,14 @@ else:
         )
 
     # * correlation of status and type
-    for trace in px.scatter(data_frame=df, y="Status", x="Type", opacity=0.2).data:
+    for trace in px.scatter(
+        data_frame=df,
+        y="Status",
+        x="Type",
+        opacity=0.2,
+        hover_name="Volcano Name",
+        labels={"Status": "Status of Volcano", "Last Known": "Volcano Type"},
+    ).data:
         fig_volcano.add_trace(
             trace,
             row=4,
