@@ -1,4 +1,4 @@
-# Streamlit live coding script
+# Imports
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -10,7 +10,7 @@ import json
 from copy import deepcopy
 
 
-# Load Data
+# Load & Cache Data
 @st.cache_data
 def load_data(path):
     df = pd.read_csv(path, index_col=0)
@@ -28,7 +28,7 @@ with open("countries.geojson", "r") as file:
 st.title("Volcano Data Exploration")
 st.text("Activity around the globe")
 
-# Backend:
+# Weight Danger Levels of volcano attributes:
 # Quick, probably not scientifically accurate weighting of the severity of volcano attributes
 status_danger_map = {
     "Holocene": 0.1,  # Minor recent activity
@@ -297,8 +297,8 @@ else:
     st.plotly_chart(fig_volcano)
 
 
-#     * Add a radio button that lets users choose to display two different options (e.g. male/female or before/after).
-#     * Optional: Can you make this button work on both of your plots simultaneously?
+# * Add a radio button that lets users choose to display two different options (e.g. male/female or before/after).
+# * Optional: Can you make this button work on both of your plots simultaneously?
 # Further customize your app as you like (e.g. add a sidebar, split the page into columns, add text, etc.).
 # Once you’re satisfied with your app, move on to the deployment stage.
 
